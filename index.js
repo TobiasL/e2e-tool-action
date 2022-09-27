@@ -6,7 +6,6 @@ const { readFile } = require('fs/promises')
 // TODO: Pack together the code? Test open the e2e.toml file.
 // TODO: Make sure that we send the Action version so that old ones can be rejected.
 // TODO: Throw error if not on Linux.
-
 const CONFIG_FILENAME = 'e2e.toml'
 
 const getConfigString = async () => {
