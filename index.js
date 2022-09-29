@@ -1,7 +1,7 @@
 const core = require('@actions/core')
 const http = require('@actions/http-client')
 const exec = require('@actions/exec')
-const { readFile } = require('fs/promises')
+const { open } = require('fs/promises')
 
 // TODO: Pack together the code? Test open the e2e.toml file.
 // TODO: Make sure that we send the Action version so that old ones can be rejected.
@@ -32,10 +32,10 @@ async function run() {
 
     console.log('res', res)
 
-    const buffer = await readFile('e2e.zip')
+    const filehandle = await open('e2e.zip')
 
-    console.log('buffer', buffer)
-    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream', buffer)
+    console.log('filehandle', filehandle)
+    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream', filehandle)
     console.log('res2', res2)
   } catch (error) {
     console.log(error)
