@@ -4138,7 +4138,10 @@ async function run() {
     const filehandle = await open('e2e.zip')
 
     console.log('filehandle', filehandle)
-    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream', filehandle)
+
+    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream',
+      filehandle.createReadStream())
+
     console.log('res2', res2)
   } catch (error) {
     console.log(error)
