@@ -4109,7 +4109,6 @@ const { readFile } = __nccwpck_require__(292)
 // TODO: Pack together the code? Test open the e2e.toml file.
 // TODO: Make sure that we send the Action version so that old ones can be rejected.
 // TODO: Throw error if not on Linux.
-
 const CONFIG_FILENAME = 'e2e.toml'
 
 const getConfigString = async () => {
@@ -4135,6 +4134,12 @@ async function run() {
     const res = await client.postJson('http://host.docker.internal:4444/hej', { temp: 1 })
 
     console.log('res', res)
+
+    const buffer = await readFile('e2e.zip')
+
+    console.log('buffer', buffer)
+    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream', buffer)
+    console.log('res2', res2)
   } catch (error) {
     console.log(error)
     core.setFailed(error.message);
