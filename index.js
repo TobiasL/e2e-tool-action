@@ -31,6 +31,12 @@ async function run() {
     const res = await client.postJson('http://host.docker.internal:4444/hej', { temp: 1 })
 
     console.log('res', res)
+
+    const buffer = await readFile('e2e.zip')
+
+    console.log('buffer', buffer)
+    const res2 = await client.sendStream('POST', 'http://host.docker.internal:4444/stream', buffer)
+    console.log('res2', res2)
   } catch (error) {
     console.log(error)
     core.setFailed(error.message);
