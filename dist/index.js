@@ -4104,7 +4104,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(186)
 const http = __nccwpck_require__(255)
 const exec = __nccwpck_require__(514)
-const { open } = __nccwpck_require__(292)
+const { open, readFile } = __nccwpck_require__(292)
 
 // TODO: Pack together the code? Test open the e2e.toml file.
 // TODO: Make sure that we send the Action version so that old ones can be rejected.

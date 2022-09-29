@@ -1,7 +1,7 @@
 const core = require('@actions/core')
 const http = require('@actions/http-client')
 const exec = require('@actions/exec')
-const { open } = require('fs/promises')
+const { open, readFile } = require('fs/promises')
 
 // TODO: Pack together the code? Test open the e2e.toml file.
 // TODO: Make sure that we send the Action version so that old ones can be rejected.
