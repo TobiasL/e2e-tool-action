@@ -5,7 +5,7 @@ const client = new http.HttpClient('e2e-tool-action')
 const createRun = async (apiKey) => {
   const url = process.env.BASE_URL || 'http://host.docker.internal:4444'
 
-  const { result } = await client.postJSON(`${url}/runs`, {
+  const { result } = await client.postJson(`${url}/runs`, {
     apiKey,
     actionVersion: '0.0.1',
   })
@@ -17,12 +17,14 @@ const uploadRunZip = async (runId, runZip) => {
   const url = process.env.BASE_URL || 'http://host.docker.internal:4444'
   const zipStream = runZip.createReadStream()
 
-  await client.sendStream('POST', `${url}/stream/${runId}`, zipStream)
+  await client.sendStream('POST', `${url}/runs/${runId}/zip`, zipStream)
 }
 
-// TODO: Implement with runId argument.
-const pollRunStatus = async () => {
+const pollRunStatus = async (runId) => {
+  const url = process.env.BASE_URL || 'http://host.docker.internal:4444'
+  const { result } = await client.get(`${url}/runs/${runId}`)
 
+  return result
 }
 
 module.exports = {
