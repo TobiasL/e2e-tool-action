@@ -3985,12 +3985,13 @@ const client = new http.HttpClient('e2e-tool-action')
 const createRun = async (apiKey) => {
   const url = process.env.BASE_URL || 'http://host.docker.internal:4444'
 
-  const { result } = await client.postJson(`${url}/runs`, {
+  const res = await client.postJson(`${url}/runs`, {
     apiKey,
     actionVersion: '0.0.1',
   })
 
-  return result
+console.log('res', res)
+  return res.result
 }
 
 const uploadRunZip = async (runId, runZip) => {
