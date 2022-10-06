@@ -4002,13 +4002,14 @@ const uploadRunZip = async (runId, runZip) => {
 
 const pollRunStatus = async (runId) => {
   const url = process.env.BASE_URL || 'http://host.docker.internal:4444'
-  const { result, statusCode } = await client.get(`${url}/runs/${runId}`)
+  const { result, statusCode } = await client.getJson(`${url}/runs/${runId}`)
 
   console.log({
     result,
     statusCode,
   })
 
+  // TODO: Check the createdAt timestamp...
   return result
 }
 

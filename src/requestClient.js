@@ -29,6 +29,7 @@ const pollRunStatus = async (runId) => {
     statusCode,
   })
 
+  // TODO: Check the createdAt timestamp...
   return result
 }
 
