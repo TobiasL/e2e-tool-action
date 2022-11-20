@@ -8,6 +8,8 @@ const { createRun, uploadRunZip, pollRunStatus } = require('./requestClient')
 const runE2E = async () => {
   const apiKey = core.getInput('api_key', { required: true })
 
+  console.log(process.env)
+
   if (!isValidRunnerOS()) {
     throw new Error('GitHub Action can only run on Linux or macOS')
   }
@@ -17,11 +19,11 @@ const runE2E = async () => {
   const runId = await createRun(apiKey)
 
   const filehandle = await zipRepoForE2E()
-  await uploadRunZip(runId, filehandle)
+  await uploadRunZip(apiKey, runId, filehandle)
 
   core.info('E2E run has been started.')
 
-  await pollRunStatus(runId)
+  await pollRunStatus(apiKey, runId)
 }
 
 module.exports = runE2E
